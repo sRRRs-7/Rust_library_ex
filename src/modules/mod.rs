@@ -7,3 +7,4 @@ pub mod mod_ffi;
 pub mod mod_lifetime;
 pub mod mod_match;
 pub mod mod_vec;
+pub mod mod_string;

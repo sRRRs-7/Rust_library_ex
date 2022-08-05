@@ -7,6 +7,7 @@ use crate::modules::{
     mod_lifetime,
     mod_match,
     mod_vec,
+    mod_string,
  };
 
 use core::str;
@@ -61,6 +62,7 @@ pub fn main() {
         mod_lifetime::main();
         mod_match::main();
         mod_vec::main();
+        mod_string::main();
     }
 }
 
