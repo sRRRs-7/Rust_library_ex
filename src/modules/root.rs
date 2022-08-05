@@ -6,6 +6,7 @@ use crate::modules::{
     mod_ffi,
     mod_lifetime,
     mod_match,
+    mod_vec,
  };
 
 use core::str;
@@ -59,6 +60,7 @@ pub fn main() {
         mod_ffi::main();
         mod_lifetime::main();
         mod_match::main();
+        mod_vec::main();
     }
 }
 
