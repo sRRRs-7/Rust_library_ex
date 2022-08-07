@@ -2,11 +2,8 @@
 use std::io::{stdin, stdout, Write, Read};
 use std::fs::{OpenOptions, File};
 use std::env::args;
-use serde::ser::SerializeMap;
 use serde::{Serialize, Deserialize};
-use serde_json::{json};
-use std::io::BufReader;
-use serde_json::Value;
+use serde_json::json;
 extern crate rustc_serialize;
 
 
@@ -53,34 +50,38 @@ fn input_json() {
     write_file(name, department);
 }
 
-fn search() {
-    let json = read_file();
-    println!("{:?}", json);
-}
-
-// read
-fn read_file() -> Employee {
-    let file = OpenOptions::new()
-        // .read(true)
-        .write(true)
-        .create(true)
-        .append(true)
-        .open("employee.json")
-        .unwrap();
-    let reader = BufReader::new(file);
-    let emp: Employee = serde_json::from_reader(reader).unwrap();
-    println!("{:?}", emp);
-    emp
-}
-
 fn load() -> Vec<Employee> {
     let mut file = File::open("employee.json").unwrap();
     let mut buf = String::new();
     file.read_to_string(&mut buf).unwrap();
     let v:Vec<Employee> = serde_json::from_str(&buf).unwrap();
-    println!("{:?}", v);
     v
 }
+
+// read
+fn read_file() {
+    let emp = load();
+    for e in emp.iter() {
+        println!("{:?}", e);
+    }
+}
+
+
+fn search() {
+    let mut search = String::new();
+    print!("enter search value: ");
+    let _ = stdout().flush();
+    stdin().read_line(&mut search).unwrap();
+    let search = search.trim().to_string();
+
+    let json = load();
+    for js in json.into_iter() {
+        let j = json!(js);
+        let v = j.get(&search).unwrap();
+        println!("{}", v);
+    };
+}
+
 
 // write
 fn write_file(name: String, department: String) {
@@ -98,16 +99,12 @@ fn write_file(name: String, department: String) {
     let e = Employee{name, department};
     emp.push(e);
 
-    let serialized = serialize_json(emp);
+    let serialized = serde_json::to_string(&emp).unwrap();
 
     write!(&file, "{}", serialized).unwrap();
 }
 
-fn serialize_json(arr: Vec<Employee>) -> String {
-    let serialized: String = serde_json::to_string(&arr).unwrap();
-    serialized
-}
-
+// init data
 fn add() {
     let file = OpenOptions::new()
     // .read(true)
@@ -127,11 +124,14 @@ fn add() {
     let mut arr = Vec::new();
     arr.push(emp);
 
-    let serialized = serialize_json(arr);
+    let serialized = serde_json::to_string(&arr).unwrap();
 
     write!(&file, "{}", serialized).unwrap();
 }
 
+
+
+//
 
 // json
 // fn convert_json(name: String, department: String) -> Value {
