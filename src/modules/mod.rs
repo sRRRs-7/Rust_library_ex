@@ -8,3 +8,5 @@ pub mod mod_lifetime;
 pub mod mod_match;
 pub mod mod_vec;
 pub mod mod_string;
+pub mod mod_hashmap;
+pub mod mod_generics;

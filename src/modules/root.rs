@@ -8,6 +8,8 @@ use crate::modules::{
     mod_match,
     mod_vec,
     mod_string,
+    mod_hashmap,
+    mod_generics,
  };
 
 use core::str;
@@ -63,6 +65,8 @@ pub fn main() {
         mod_match::main();
         mod_vec::main();
         mod_string::main();
+        mod_hashmap::main();
+        mod_generics::main();
     }
 }
 

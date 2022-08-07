@@ -1,10 +1,11 @@
-
+#[derive(Debug)]
 enum Framework {
     Vue,
     React,
     Angular,
 }
 
+#[derive(Debug)]
 enum Language {
     Javascript(Framework),
     Go,
@@ -28,6 +29,8 @@ pub fn main() {
     // placeholder
     let n = placeholder(1);
     println!("{:?} {}", n.0, n.1);
+
+    println!("{:?} {:?} {:?} {:?}", Vue, Angular, Go, Rust)
 }
 
 // functions
