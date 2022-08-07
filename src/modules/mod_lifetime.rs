@@ -11,6 +11,10 @@ pub fn main() {
 
     let recv = lifetime2("xx", "yy", 135711);
     println!("longest is {}", recv);
+
+    // exception
+    let s = exception("linux");
+    println!("exception: {}", s);
 }
 
 fn scope() {
@@ -40,4 +44,15 @@ fn lifetime2<'a, T>(x: &'a str, y: &'a str, s: T) -> &'a str
         } else {
             y
         }
+}
+
+// lifetime is not need pattern
+fn exception(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &v) in bytes.iter().enumerate() {
+        if v == b'n' {
+            return &s[..=i];
+        }
+    }
+    &s[..]
 }

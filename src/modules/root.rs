@@ -17,7 +17,6 @@ use crate::modules::{
 use core::str;
 use std::ops::Deref;
 use std::ops::Drop;
-
 use super::mod_trait;
 
 #[derive(Debug)]
