@@ -4,7 +4,6 @@ use std::fs::{OpenOptions, File};
 use std::env::args;
 use serde::{Serialize, Deserialize};
 use serde_json::json;
-extern crate rustc_serialize;
 
 
 #[derive(Debug)]
