@@ -10,3 +10,6 @@ pub mod mod_vec;
 pub mod mod_string;
 pub mod mod_hashmap;
 pub mod mod_generics;
+pub mod mod_error;
+pub mod mod_struct;
+pub mod mod_trait;

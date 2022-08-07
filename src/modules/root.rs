@@ -10,11 +10,15 @@ use crate::modules::{
     mod_string,
     mod_hashmap,
     mod_generics,
+    mod_error,
+    mod_struct,
  };
 
 use core::str;
 use std::ops::Deref;
 use std::ops::Drop;
+
+use super::mod_trait;
 
 #[derive(Debug)]
 struct MyBox<T> (T);
@@ -67,6 +71,9 @@ pub fn main() {
         mod_string::main();
         mod_hashmap::main();
         mod_generics::main();
+        mod_error::main();
+        mod_struct::main();
+        mod_trait::main();
     }
 }
 
