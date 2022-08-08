@@ -19,6 +19,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn if_test() -> Result<(), String> {
         if 2 * 2 == 4 {
             Ok(())

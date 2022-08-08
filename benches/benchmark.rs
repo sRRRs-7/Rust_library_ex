@@ -7,7 +7,7 @@ fn bm1(c: &mut Criterion) {
     c.bench_function("bench1",
     |b| b.iter(|| {
         let mut cnt = 0;
-        for i in 1..=100 {
+        for i in 1..=10 {
             cnt += i
         }
         println!("{}", cnt);
@@ -18,7 +18,7 @@ fn bm2(c: &mut Criterion) {
     c.bench_function("bench2",
     |b| b.iter(|| {
         let mut cnt = 0;
-        for i in 1..=100 {
+        for i in 1..=5 {
             cnt += i
         }
         println!("{}", cnt);

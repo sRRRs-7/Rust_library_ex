@@ -34,15 +34,15 @@ fn input_json() {
     // enter text
     let mut name = String::new();
     print!("enter employee name: ");
-    let _ = stdout().flush();
-    stdin().read_line(&mut name).unwrap();
+    stdin().read_line(&mut name).unwrap();      // buffer
+    let _ = stdout().flush();                        // buffer refresh
     let name = name.trim().to_string();
 
     // enter text
     let mut department = String::new();
     print!("enter employee department: ");
-    let _ = stdout().flush();
     stdin().read_line(&mut department).unwrap();
+    let _ = stdout().flush();
     let department = department.trim().to_string();
 
     // write
@@ -106,12 +106,12 @@ fn write_file(name: String, department: String) {
 // init data
 fn add() {
     let file = OpenOptions::new()
-    // .read(true)
-      // .append(true)
-    .write(true)
-    .create(true)
-    .open("employee.json")
-    .unwrap();
+        // .read(true)
+        // .append(true)
+        .write(true)
+        .create(true)
+        .open("employee.json")
+        .unwrap();
 
     let name = String::from("name");
     let department = String::from("department");

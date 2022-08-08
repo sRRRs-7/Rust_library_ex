@@ -25,4 +25,8 @@ impl Display for Season {
 pub fn main() {
     let season = Season::new(3,2,1,4,);
     println!("{}", season);
+    assert_eq!(season.spring, 3);
+    assert_eq!(season.summer, 2);
+    assert_eq!(season.autumn, 1);
+    assert_eq!(season.winter, 4);
 }

@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/srrrs/App/Rust/app/rust/rust2'
+cargo run write
+make: Leaving directory `/Users/srrrs/App/Rust/app/rust/rust2'
+ 
