@@ -14,3 +14,4 @@ pub mod mod_error;
 pub mod mod_struct;
 pub mod mod_trait;
 pub mod mod_test;
+pub mod mod_iter;

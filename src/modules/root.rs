@@ -12,6 +12,7 @@ use crate::modules::{
     mod_generics,
     mod_error,
     mod_struct,
+    mod_iter,
  };
 
 use core::str;
@@ -73,6 +74,7 @@ pub fn main() {
         mod_error::main();
         mod_struct::main();
         mod_trait::main();
+        mod_iter::main();
     }
 }
 

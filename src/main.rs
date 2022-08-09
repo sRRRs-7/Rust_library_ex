@@ -2,6 +2,8 @@
 mod modules;
 mod interface;
 mod cli;
+mod lib;
+mod practice;
 
 fn main() {
     // CLI
@@ -15,6 +17,9 @@ fn main() {
     test();
 
     modules::root::main();
+
+    practice::closure::main();
+    practice::closure_generics::main();
 }
 
 

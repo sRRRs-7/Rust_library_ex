@@ -5,16 +5,18 @@ use std::io::Read;
 use std::process;
 use std::error::Error;
 
+use super::lib2;
 
 
 struct Args {
     query: String,
     filename: String,
+    case_sensitive: bool,
 }
 
 impl Args {
-    fn new(query: String, filename: String) -> Self {
-        Self { query, filename}
+    fn new(query: String, filename: String, case_sensitive: bool) -> Self {
+        Self { query, filename, case_sensitive}
     }
 }
 
@@ -30,18 +32,39 @@ pub fn main() {
     let v = find_value(&buf, &args.query);
     println!("query count: {}", v);
 
-    let result = search(&buf, &args.query);
+    let result = lib2::search(&buf, &args.query);
     println!("find query line: {:?}", result);
+
+    let result2 = lib2::sensitive_search(&buf, &args.query);
+    println!("find sensitive query line: {:?}", result2);
 }
 
 fn get_arg(arg: &[String]) -> Result<Args, &'static str> {
-    if arg.len() < 3 {
-        return Err("args must be at least 3 arguments");
-    }
-    let query = arg[1].clone();
-    let filename = arg[2].clone();
+    arg.iter().next();
+    let query = match arg.into_iter().next() {
+        Some(arg) => arg,
+        None => return Err("did not get query"),
+    };
 
-    Ok(Args::new(query, filename))
+    let filename = match arg.into_iter().next() {
+        Some(arg) => arg,
+        None => return Err("did not get filename"),
+    };
+
+    // if arg.len() < 3 {
+    //     return Err("args must be at least 3 arguments");
+    // }
+    // let query = arg[1].clone();
+    // let filename = arg[2].clone();
+
+    let case_sensitive = std::env::var("CASE_SENSITIVE").is_err();  //  CASE_SENSITIVE=1 cargo run ggg text.txt
+    println!("case_sensitive: {}", case_sensitive);
+
+    Ok(Args::new(
+        query.to_string(),
+        filename.to_string(),
+        case_sensitive
+    ))
 }
 
 fn read_file(filename: &str) -> Result<String, Box<dyn Error>> {
@@ -56,12 +79,6 @@ fn find_value(buf: &String, query: &str) -> usize {
     s
 }
 
-pub fn search<'a>(contents: &'a str, query: &'a str) -> Vec<&'a str> {
-    let mut r = Vec::new();
-    for line in contents.lines() {
-        if line.contains(query) {
-            r.push(line.trim())
-        }
-    }
-    r
+pub fn search2<'a>(contents: &'a str, query: &'a str) -> Vec<&'a str> {
+    contents.lines().filter(|line| {line.contains(query)}).collect()
 }
