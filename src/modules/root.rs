@@ -13,6 +13,7 @@ use crate::modules::{
     mod_error,
     mod_struct,
     mod_iter,
+    mod_comments
  };
 
 use core::str;

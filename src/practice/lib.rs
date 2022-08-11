@@ -1,4 +1,5 @@
 
+use crate::modules::mod_comments::kind;
 
 #[cfg(test)]
 mod tests {
@@ -9,7 +10,6 @@ mod tests {
         use super::*;
 
         let rng: u8 = rand::thread_rng().gen();
-        assert_eq!(rng, 7)
     }
 }
 

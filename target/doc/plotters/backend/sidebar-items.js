@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SVGBackend","The SVG image drawing backend"]],"trait":[["DrawingBackend","The drawing backend trait, which implements the low-level drawing APIs. This trait has a set of default implementation. And the minimal requirement of implementing a drawing backend is implementing the `draw_pixel` function."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SVGBackend","The SVG image drawing backend"]]});

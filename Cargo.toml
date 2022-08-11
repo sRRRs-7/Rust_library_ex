@@ -1,7 +1,10 @@
 [package]
 name = "rust2"
+license = "MIT"
 version = "0.1.0"
 edition = "2021"
+authors = ["srrrs"]
+description = "crate library description"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -16,5 +19,9 @@ rand = "0.8.4"
 name = "benchmark"
 harness = false
 
+[profile.dev]
+opt-level = 0
+
 [profile.release]
+opt-level = 3
 panic = 'abort'

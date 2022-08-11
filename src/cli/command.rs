@@ -7,7 +7,7 @@ use std::error::Error;
 
 use super::lib2;
 
-
+#[derive(Debug)]
 struct Args {
     query: String,
     filename: String,
@@ -27,7 +27,10 @@ pub fn main() {
         process::exit(1);
     });
 
-    let buf = read_file(&args.filename).unwrap();
+    let buf = read_file(&args.filename).unwrap_or_else(|err| {
+        eprintln!("Error: {}", err);
+        process::exit(1);
+    });
 
     let v = find_value(&buf, &args.query);
     println!("query count: {}", v);
@@ -40,13 +43,14 @@ pub fn main() {
 }
 
 fn get_arg(arg: &[String]) -> Result<Args, &'static str> {
-    arg.iter().next();
-    let query = match arg.into_iter().next() {
+    let mut a = arg.iter();
+    a.next();
+    let query = match a.next() {
         Some(arg) => arg,
         None => return Err("did not get query"),
     };
 
-    let filename = match arg.into_iter().next() {
+    let filename = match a.next() {
         Some(arg) => arg,
         None => return Err("did not get filename"),
     };

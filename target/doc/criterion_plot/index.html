@@ -1,0 +1,325 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Criterion’s plotting library."><meta name="keywords" content="rust, rustlang, rust-lang, criterion_plot"><title>criterion_plot - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><script defer src="../main.js"></script>
+    <noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../criterion_plot/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../criterion_plot/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate criterion_plot</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.4.5</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#functions">Functions</a></li></ul></div></section><div id="sidebar-vars" data-name="criterion_plot" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../criterion_plot/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">criterion_plot</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/criterion_plot/lib.rs.html#1-1093">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><a href="https://github.com/bheisler/criterion.rs">Criterion</a>’s plotting library.</p>
+<p><strong>WARNING</strong> This library is criterion’s implementation detail and there no plans to stabilize
+it. In other words, the API may break at any time without notice.</p>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
+<ul>
+<li>Simple “curves” (based on <a href="http://gnuplot.sourceforge.net/demo/simple.html"><code>simple.dem</code></a>)</li>
+</ul>
+<p><img src="curve.svg" alt="Plot" /></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">itertools_num::linspace</span>;
+<span class="kw">use</span> <span class="ident">criterion_plot::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> <span class="kw-2">ref</span> <span class="ident">xs</span> <span class="op">=</span> <span class="ident">linspace</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>(<span class="op">-</span><span class="number">10.</span>, <span class="number">10.</span>, <span class="number">51</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+
+<span class="ident">Figure::new</span>()
+    .<span class="ident">configure</span>(<span class="ident">Key</span>, <span class="op">|</span><span class="ident">k</span><span class="op">|</span> {
+        <span class="ident">k</span>.<span class="ident">set</span>(<span class="ident">Boxed::Yes</span>)
+         .<span class="ident">set</span>(<span class="ident">Position::Inside</span>(<span class="ident">Vertical::Top</span>, <span class="ident">Horizontal::Left</span>))
+    })
+    .<span class="ident">plot</span>(<span class="ident">LinesPoints</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">y</span>: <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">sin</span>()),
+          },
+          <span class="op">|</span><span class="ident">lp</span><span class="op">|</span> {
+              <span class="ident">lp</span>.<span class="ident">set</span>(<span class="ident">Color::DarkViolet</span>)
+                .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;sin(x)&quot;</span>))
+                .<span class="ident">set</span>(<span class="ident">LineType::Dash</span>)
+                .<span class="ident">set</span>(<span class="ident">PointSize</span>(<span class="number">1.5</span>))
+                .<span class="ident">set</span>(<span class="ident">PointType::Circle</span>)
+          })
+    .<span class="ident">plot</span>(<span class="ident">Steps</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">y</span>: <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">atan</span>()),
+          },
+          <span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
+              <span class="ident">s</span>.<span class="ident">set</span>(<span class="ident">Color::Rgb</span>(<span class="number">0</span>, <span class="number">158</span>, <span class="number">115</span>))
+               .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;atan(x)&quot;</span>))
+               .<span class="ident">set</span>(<span class="ident">LineWidth</span>(<span class="number">2.</span>))
+          })
+    .<span class="ident">plot</span>(<span class="ident">Impulses</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">y</span>: <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">atan</span>().<span class="ident">cos</span>()),
+          },
+          <span class="op">|</span><span class="ident">i</span><span class="op">|</span> {
+              <span class="ident">i</span>.<span class="ident">set</span>(<span class="ident">Color::Rgb</span>(<span class="number">86</span>, <span class="number">180</span>, <span class="number">233</span>))
+               .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;cos(atan(x))&quot;</span>))
+          })
+    .<span class="ident">draw</span>()  <span class="comment">// (rest of the chain has been omitted)</span></code></pre></div>
+<ul>
+<li>error bars (based on
+<a href="https://plot.ly/julia/error-bars/#Colored-and-Styled-Error-Bars">Julia plotting tutorial</a>)</li>
+</ul>
+<p><img src="error_bar.svg" alt="Plot" /></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::f64::consts::PI</span>;
+
+<span class="kw">use</span> <span class="ident">itertools_num::linspace</span>;
+<span class="kw">use</span> <span class="ident">rand::Rng</span>;
+<span class="kw">use</span> <span class="ident">criterion_plot::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">sinc</span>(<span class="kw-2">mut</span> <span class="ident">x</span>: <span class="ident">f64</span>) -&gt; <span class="ident">f64</span> {
+    <span class="kw">if</span> <span class="ident">x</span> <span class="op">==</span> <span class="number">0.</span> {
+        <span class="number">1.</span>
+    } <span class="kw">else</span> {
+        <span class="ident">x</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">PI</span>;
+        <span class="ident">x</span>.<span class="ident">sin</span>() <span class="op">/</span> <span class="ident">x</span>
+    }
+}
+
+<span class="kw">let</span> <span class="kw-2">ref</span> <span class="ident">xs_</span> <span class="op">=</span> <span class="ident">linspace</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>(<span class="op">-</span><span class="number">4.</span>, <span class="number">4.</span>, <span class="number">101</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+
+<span class="comment">// Fake some data</span>
+<span class="kw">let</span> <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
+<span class="kw">let</span> <span class="ident">xs</span> <span class="op">=</span> <span class="ident">linspace</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>(<span class="op">-</span><span class="number">4.</span>, <span class="number">4.</span>, <span class="number">13</span>).<span class="ident">skip</span>(<span class="number">1</span>).<span class="ident">take</span>(<span class="number">11</span>);
+<span class="kw">let</span> <span class="ident">ys</span> <span class="op">=</span> <span class="ident">xs</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">sinc</span>(<span class="ident">x</span>) <span class="op">+</span> <span class="number">0.05</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>() <span class="op">-</span> <span class="number">0.025</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">y_low</span> <span class="op">=</span> <span class="ident">ys</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">y</span><span class="op">|</span> <span class="ident">y</span> <span class="op">-</span> <span class="number">0.025</span> <span class="op">-</span> <span class="number">0.075</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">y_high</span> <span class="op">=</span> <span class="ident">ys</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">y</span><span class="op">|</span> <span class="ident">y</span> <span class="op">+</span> <span class="number">0.025</span> <span class="op">+</span> <span class="number">0.075</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">xs</span> <span class="op">=</span> <span class="ident">linspace</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>(<span class="op">-</span><span class="number">4.</span>, <span class="number">4.</span>, <span class="number">13</span>).<span class="ident">skip</span>(<span class="number">1</span>).<span class="ident">take</span>(<span class="number">11</span>);
+<span class="kw">let</span> <span class="ident">xs</span> <span class="op">=</span> <span class="ident">xs</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="number">0.2</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>() <span class="op">-</span> <span class="number">0.1</span>);
+
+<span class="ident">Figure::new</span>()
+    .<span class="ident">configure</span>(<span class="ident">Axis::BottomX</span>, <span class="op">|</span><span class="ident">a</span><span class="op">|</span> {
+        <span class="ident">a</span>.<span class="ident">set</span>(<span class="ident">TicLabels</span> {
+            <span class="ident">labels</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;-π&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;π&quot;</span>],
+            <span class="ident">positions</span>: <span class="kw-2">&amp;</span>[<span class="op">-</span><span class="ident">PI</span>, <span class="number">0.</span>, <span class="ident">PI</span>],
+        })
+    })
+    .<span class="ident">configure</span>(<span class="ident">Key</span>,
+               <span class="op">|</span><span class="ident">k</span><span class="op">|</span> <span class="ident">k</span>.<span class="ident">set</span>(<span class="ident">Position::Outside</span>(<span class="ident">Vertical::Top</span>, <span class="ident">Horizontal::Right</span>)))
+    .<span class="ident">plot</span>(<span class="ident">Lines</span> {
+              <span class="ident">x</span>: <span class="ident">xs_</span>,
+              <span class="ident">y</span>: <span class="ident">xs_</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>().<span class="ident">map</span>(<span class="ident">sinc</span>),
+          },
+          <span class="op">|</span><span class="ident">l</span><span class="op">|</span> {
+              <span class="ident">l</span>.<span class="ident">set</span>(<span class="ident">Color::Rgb</span>(<span class="number">0</span>, <span class="number">158</span>, <span class="number">115</span>))
+               .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;sinc(x)&quot;</span>))
+               .<span class="ident">set</span>(<span class="ident">LineWidth</span>(<span class="number">2.</span>))
+          })
+    .<span class="ident">plot</span>(<span class="ident">YErrorBars</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="ident">ys</span>,
+              <span class="ident">y_low</span>: <span class="kw-2">&amp;</span><span class="ident">y_low</span>,
+              <span class="ident">y_high</span>: <span class="kw-2">&amp;</span><span class="ident">y_high</span>,
+          },
+          <span class="op">|</span><span class="ident">eb</span><span class="op">|</span> {
+              <span class="ident">eb</span>.<span class="ident">set</span>(<span class="ident">Color::DarkViolet</span>)
+                .<span class="ident">set</span>(<span class="ident">LineWidth</span>(<span class="number">2.</span>))
+                .<span class="ident">set</span>(<span class="ident">PointType::FilledCircle</span>)
+                .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;measured&quot;</span>))
+          })
+    .<span class="ident">draw</span>()  <span class="comment">// (rest of the chain has been omitted)</span></code></pre></div>
+<ul>
+<li>Candlesticks (based on
+<a href="http://gnuplot.sourceforge.net/demo/candlesticks.html"><code>candlesticks.dem</code></a>)</li>
+</ul>
+<p><img src="candlesticks.svg" alt="Plot" /></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">criterion_plot::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">rand::Rng</span>;
+
+<span class="kw">let</span> <span class="ident">xs</span> <span class="op">=</span> <span class="number">1</span>..<span class="number">11</span>;
+
+<span class="comment">// Fake some data</span>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">rand::thread_rng</span>();
+<span class="kw">let</span> <span class="ident">bh</span> <span class="op">=</span> <span class="ident">xs</span>.<span class="ident">clone</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="number">5f64</span> <span class="op">+</span> <span class="number">2.5</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">bm</span> <span class="op">=</span> <span class="ident">xs</span>.<span class="ident">clone</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="number">2.5f64</span> <span class="op">+</span> <span class="number">2.5</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">wh</span> <span class="op">=</span> <span class="ident">bh</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">y</span><span class="op">|</span> <span class="ident">y</span> <span class="op">+</span> (<span class="number">10.</span> <span class="op">-</span> <span class="ident">y</span>) <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">wm</span> <span class="op">=</span> <span class="ident">bm</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">y</span><span class="op">|</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">bm</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">bh</span>.<span class="ident">iter</span>()).<span class="ident">map</span>(<span class="op">|</span>(<span class="kw-2">&amp;</span><span class="ident">l</span>, <span class="kw-2">&amp;</span><span class="ident">h</span>)<span class="op">|</span> (<span class="ident">h</span> <span class="op">-</span> <span class="ident">l</span>) <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>() <span class="op">+</span> <span class="ident">l</span>)
+    .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+
+<span class="ident">Figure::new</span>()
+    .<span class="ident">set</span>(<span class="ident">BoxWidth</span>(<span class="number">0.2</span>))
+    .<span class="ident">configure</span>(<span class="ident">Axis::BottomX</span>, <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">set</span>(<span class="ident">Range::Limits</span>(<span class="number">0.</span>, <span class="number">11.</span>)))
+    .<span class="ident">plot</span>(<span class="ident">Candlesticks</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>.<span class="ident">clone</span>(),
+              <span class="ident">whisker_min</span>: <span class="kw-2">&amp;</span><span class="ident">wm</span>,
+              <span class="ident">box_min</span>: <span class="kw-2">&amp;</span><span class="ident">bm</span>,
+              <span class="ident">box_high</span>: <span class="kw-2">&amp;</span><span class="ident">bh</span>,
+              <span class="ident">whisker_high</span>: <span class="kw-2">&amp;</span><span class="ident">wh</span>,
+          },
+          <span class="op">|</span><span class="ident">cs</span><span class="op">|</span> {
+              <span class="ident">cs</span>.<span class="ident">set</span>(<span class="ident">Color::Rgb</span>(<span class="number">86</span>, <span class="number">180</span>, <span class="number">233</span>))
+                .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;Quartiles&quot;</span>))
+                .<span class="ident">set</span>(<span class="ident">LineWidth</span>(<span class="number">2.</span>))
+          })
+    <span class="comment">// trick to plot the median</span>
+    .<span class="ident">plot</span>(<span class="ident">Candlesticks</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">whisker_min</span>: <span class="kw-2">&amp;</span><span class="ident">m</span>,
+              <span class="ident">box_min</span>: <span class="kw-2">&amp;</span><span class="ident">m</span>,
+              <span class="ident">box_high</span>: <span class="kw-2">&amp;</span><span class="ident">m</span>,
+              <span class="ident">whisker_high</span>: <span class="kw-2">&amp;</span><span class="ident">m</span>,
+          },
+          <span class="op">|</span><span class="ident">cs</span><span class="op">|</span> {
+              <span class="ident">cs</span>.<span class="ident">set</span>(<span class="ident">Color::Black</span>)
+                .<span class="ident">set</span>(<span class="ident">LineWidth</span>(<span class="number">2.</span>))
+          })
+    .<span class="ident">draw</span>()  <span class="comment">// (rest of the chain has been omitted)</span></code></pre></div>
+<ul>
+<li>Multiaxis (based on <a href="http://gnuplot.sourceforge.net/demo/multiaxis.html"><code>multiaxis.dem</code></a>)</li>
+</ul>
+<p><img src="multiaxis.svg" alt="Plot" /></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::f64::consts::PI</span>;
+
+<span class="kw">use</span> <span class="ident">itertools_num::linspace</span>;
+<span class="kw">use</span> <span class="ident">num_complex::Complex</span>;
+<span class="kw">use</span> <span class="ident">criterion_plot::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">tf</span>(<span class="ident">x</span>: <span class="ident">f64</span>) -&gt; <span class="ident">Complex</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="ident">Complex::new</span>(<span class="number">0.</span>, <span class="ident">x</span>) <span class="op">/</span> <span class="ident">Complex::new</span>(<span class="number">10.</span>, <span class="ident">x</span>) <span class="op">/</span> <span class="ident">Complex::new</span>(<span class="number">1.</span>, <span class="ident">x</span> <span class="op">/</span> <span class="number">10_000.</span>)
+}
+
+<span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">end</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>) <span class="op">=</span> (<span class="number">1.1</span>, <span class="number">90_000.</span>);
+<span class="kw">let</span> <span class="kw-2">ref</span> <span class="ident">xs</span> <span class="op">=</span> <span class="ident">linspace</span>(<span class="ident">start</span>.<span class="ident">ln</span>(), <span class="ident">end</span>.<span class="ident">ln</span>(), <span class="number">101</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">exp</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">phase</span> <span class="op">=</span> <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">tf</span>(<span class="ident">x</span>).<span class="ident">arg</span>() <span class="op">*</span> <span class="number">180.</span> <span class="op">/</span> <span class="ident">PI</span>);
+<span class="kw">let</span> <span class="ident">magnitude</span> <span class="op">=</span> <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">tf</span>(<span class="ident">x</span>).<span class="ident">norm</span>());
+
+<span class="ident">Figure::new</span>().
+    <span class="ident">set</span>(<span class="ident">Title</span>(<span class="string">&quot;Frequency response&quot;</span>)).
+    <span class="ident">configure</span>(<span class="ident">Axis::BottomX</span>, <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.
+        <span class="ident">configure</span>(<span class="ident">Grid::Major</span>, <span class="op">|</span><span class="ident">g</span><span class="op">|</span> <span class="ident">g</span>.
+            <span class="ident">show</span>()).
+        <span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;Angular frequency (rad/s)&quot;</span>)).
+        <span class="ident">set</span>(<span class="ident">Range::Limits</span>(<span class="ident">start</span>, <span class="ident">end</span>)).
+        <span class="ident">set</span>(<span class="ident">Scale::Logarithmic</span>)).
+    <span class="ident">configure</span>(<span class="ident">Axis::LeftY</span>, <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.
+        <span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;Gain&quot;</span>)).
+        <span class="ident">set</span>(<span class="ident">Scale::Logarithmic</span>)).
+    <span class="ident">configure</span>(<span class="ident">Axis::RightY</span>, <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.
+        <span class="ident">configure</span>(<span class="ident">Grid::Major</span>, <span class="op">|</span><span class="ident">g</span><span class="op">|</span> <span class="ident">g</span>.
+            <span class="ident">show</span>()).
+        <span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;Phase shift (°)&quot;</span>))).
+    <span class="ident">configure</span>(<span class="ident">Key</span>, <span class="op">|</span><span class="ident">k</span><span class="op">|</span> <span class="ident">k</span>.
+        <span class="ident">set</span>(<span class="ident">Position::Inside</span>(<span class="ident">Vertical::Top</span>, <span class="ident">Horizontal::Center</span>)).
+        <span class="ident">set</span>(<span class="ident">Title</span>(<span class="string">&quot; &quot;</span>))).
+    <span class="ident">plot</span>(<span class="ident">Lines</span> {
+        <span class="ident">x</span>: <span class="ident">xs</span>,
+        <span class="ident">y</span>: <span class="ident">magnitude</span>,
+    }, <span class="op">|</span><span class="ident">l</span><span class="op">|</span> <span class="ident">l</span>.
+        <span class="ident">set</span>(<span class="ident">Color::DarkViolet</span>).
+        <span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;Magnitude&quot;</span>)).
+        <span class="ident">set</span>(<span class="ident">LineWidth</span>(<span class="number">2.</span>))).
+    <span class="ident">plot</span>(<span class="ident">Lines</span> {
+        <span class="ident">x</span>: <span class="ident">xs</span>,
+        <span class="ident">y</span>: <span class="ident">phase</span>,
+    }, <span class="op">|</span><span class="ident">l</span><span class="op">|</span> <span class="ident">l</span>.
+        <span class="ident">set</span>(<span class="ident">Axes::BottomXRightY</span>).
+        <span class="ident">set</span>(<span class="ident">Color::Rgb</span>(<span class="number">0</span>, <span class="number">158</span>, <span class="number">115</span>)).
+        <span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;Phase&quot;</span>)).
+        <span class="ident">set</span>(<span class="ident">LineWidth</span>(<span class="number">2.</span>))).
+    <span class="ident">draw</span>().  <span class="comment">// (rest of the chain has been omitted)</span></code></pre></div>
+<ul>
+<li>Filled curves (based on
+<a href="http://gnuplot.sourceforge.net/demo/transparent.html"><code>transparent.dem</code></a>)</li>
+</ul>
+<p><img src="filled_curve.svg" alt="Plot" /></p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::f64::consts::PI</span>;
+<span class="kw">use</span> <span class="ident">std::iter</span>;
+
+<span class="kw">use</span> <span class="ident">itertools_num::linspace</span>;
+<span class="kw">use</span> <span class="ident">criterion_plot::prelude</span>::<span class="kw-2">*</span>;
+
+<span class="kw">let</span> (<span class="ident">start</span>, <span class="ident">end</span>) <span class="op">=</span> (<span class="op">-</span><span class="number">5.</span>, <span class="number">5.</span>);
+<span class="kw">let</span> <span class="kw-2">ref</span> <span class="ident">xs</span> <span class="op">=</span> <span class="ident">linspace</span>(<span class="ident">start</span>, <span class="ident">end</span>, <span class="number">101</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">let</span> <span class="ident">zeros</span> <span class="op">=</span> <span class="ident">iter::repeat</span>(<span class="number">0</span>);
+
+<span class="kw">fn</span> <span class="ident">gaussian</span>(<span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">mu</span>: <span class="ident">f64</span>, <span class="ident">sigma</span>: <span class="ident">f64</span>) -&gt; <span class="ident">f64</span> {
+    <span class="number">1.</span> <span class="op">/</span> (((<span class="ident">x</span> <span class="op">-</span> <span class="ident">mu</span>).<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="number">2.</span> <span class="op">/</span> <span class="ident">sigma</span>.<span class="ident">powi</span>(<span class="number">2</span>)).<span class="ident">exp</span>() <span class="op">*</span> <span class="ident">sigma</span> <span class="op">*</span> (<span class="number">2.</span> <span class="op">*</span> <span class="ident">PI</span>).<span class="ident">sqrt</span>())
+}
+
+<span class="ident">Figure::new</span>()
+    .<span class="ident">set</span>(<span class="ident">Title</span>(<span class="string">&quot;Transparent filled curve&quot;</span>))
+    .<span class="ident">configure</span>(<span class="ident">Axis::BottomX</span>, <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">set</span>(<span class="ident">Range::Limits</span>(<span class="ident">start</span>, <span class="ident">end</span>)))
+    .<span class="ident">configure</span>(<span class="ident">Axis::LeftY</span>, <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">set</span>(<span class="ident">Range::Limits</span>(<span class="number">0.</span>, <span class="number">1.</span>)))
+    .<span class="ident">configure</span>(<span class="ident">Key</span>, <span class="op">|</span><span class="ident">k</span><span class="op">|</span> {
+        <span class="ident">k</span>.<span class="ident">set</span>(<span class="ident">Justification::Left</span>)
+         .<span class="ident">set</span>(<span class="ident">Order::SampleText</span>)
+         .<span class="ident">set</span>(<span class="ident">Position::Inside</span>(<span class="ident">Vertical::Top</span>, <span class="ident">Horizontal::Left</span>))
+         .<span class="ident">set</span>(<span class="ident">Title</span>(<span class="string">&quot;Gaussian Distribution&quot;</span>))
+    })
+    .<span class="ident">plot</span>(<span class="ident">FilledCurve</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">y1</span>: <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">gaussian</span>(<span class="ident">x</span>, <span class="number">0.5</span>, <span class="number">0.5</span>)),
+              <span class="ident">y2</span>: <span class="ident">zeros</span>.<span class="ident">clone</span>(),
+          },
+          <span class="op">|</span><span class="ident">fc</span><span class="op">|</span> {
+              <span class="ident">fc</span>.<span class="ident">set</span>(<span class="ident">Color::ForestGreen</span>)
+                .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;μ = 0.5 σ = 0.5&quot;</span>))
+          })
+    .<span class="ident">plot</span>(<span class="ident">FilledCurve</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">y1</span>: <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">gaussian</span>(<span class="ident">x</span>, <span class="number">2.0</span>, <span class="number">1.0</span>)),
+              <span class="ident">y2</span>: <span class="ident">zeros</span>.<span class="ident">clone</span>(),
+          },
+          <span class="op">|</span><span class="ident">fc</span><span class="op">|</span> {
+              <span class="ident">fc</span>.<span class="ident">set</span>(<span class="ident">Color::Gold</span>)
+                .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;μ = 2.0 σ = 1.0&quot;</span>))
+                .<span class="ident">set</span>(<span class="ident">Opacity</span>(<span class="number">0.5</span>))
+          })
+    .<span class="ident">plot</span>(<span class="ident">FilledCurve</span> {
+              <span class="ident">x</span>: <span class="ident">xs</span>,
+              <span class="ident">y1</span>: <span class="ident">xs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">gaussian</span>(<span class="ident">x</span>, <span class="op">-</span><span class="number">1.0</span>, <span class="number">2.0</span>)),
+              <span class="ident">y2</span>: <span class="ident">zeros</span>,
+          },
+          <span class="op">|</span><span class="ident">fc</span><span class="op">|</span> {
+              <span class="ident">fc</span>.<span class="ident">set</span>(<span class="ident">Color::Red</span>)
+                .<span class="ident">set</span>(<span class="ident">Label</span>(<span class="string">&quot;μ = -1.0 σ = 2.0&quot;</span>))
+                .<span class="ident">set</span>(<span class="ident">Opacity</span>(<span class="number">0.5</span>))
+          })
+    .<span class="ident">draw</span>()
+    .<span class="ident">ok</span>()
+    .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">gnuplot</span><span class="op">|</span> {
+        <span class="ident">gnuplot</span>.<span class="ident">wait_with_output</span>().<span class="ident">ok</span>().<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">String::from_utf8</span>(<span class="ident">p</span>.<span class="ident">stderr</span>).<span class="ident">ok</span>())
+    }));</code></pre></div>
+</div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="axis/index.html" title="criterion_plot::axis mod">axis</a></div><div class="item-right docblock-short"><p>Coordinate axis</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="candlestick/index.html" title="criterion_plot::candlestick mod">candlestick</a></div><div class="item-right docblock-short"><p>“Candlestick” plots</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="curve/index.html" title="criterion_plot::curve mod">curve</a></div><div class="item-right docblock-short"><p>Simple “curve” like plots</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="errorbar/index.html" title="criterion_plot::errorbar mod">errorbar</a></div><div class="item-right docblock-short"><p>Error bar plots</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="filledcurve/index.html" title="criterion_plot::filledcurve mod">filledcurve</a></div><div class="item-right docblock-short"><p>Filled curve plots</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="grid/index.html" title="criterion_plot::grid mod">grid</a></div><div class="item-right docblock-short"><p>Gridline</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="key/index.html" title="criterion_plot::key mod">key</a></div><div class="item-right docblock-short"><p>Key (or legend)</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prelude/index.html" title="criterion_plot::prelude mod">prelude</a></div><div class="item-right docblock-short"><p>A collection of the most used traits, structs and enums</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="proxy/index.html" title="criterion_plot::proxy mod">proxy</a></div><div class="item-right docblock-short"><p>Generic constructors for newtypes</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="traits/index.html" title="criterion_plot::traits mod">traits</a></div><div class="item-right docblock-short"><p>Traits</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BoxWidth.html" title="criterion_plot::BoxWidth struct">BoxWidth</a></div><div class="item-right docblock-short"><p>Box width for box-related plots: bars, candlesticks, etc</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Figure.html" title="criterion_plot::Figure struct">Figure</a></div><div class="item-right docblock-short"><p>Plot container</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Font.html" title="criterion_plot::Font struct">Font</a></div><div class="item-right docblock-short"><p>A font name</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.FontSize.html" title="criterion_plot::FontSize struct">FontSize</a></div><div class="item-right docblock-short"><p>The size of a font</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Key.html" title="criterion_plot::Key struct">Key</a></div><div class="item-right docblock-short"><p>The key or legend</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Label.html" title="criterion_plot::Label struct">Label</a></div><div class="item-right docblock-short"><p>Plot label</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.LineWidth.html" title="criterion_plot::LineWidth struct">LineWidth</a></div><div class="item-right docblock-short"><p>Width of the lines</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Opacity.html" title="criterion_plot::Opacity struct">Opacity</a></div><div class="item-right docblock-short"><p>Fill color opacity</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Output.html" title="criterion_plot::Output struct">Output</a></div><div class="item-right docblock-short"><p>Output file path</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PointSize.html" title="criterion_plot::PointSize struct">PointSize</a></div><div class="item-right docblock-short"><p>Size of the points</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ScaleFactor.html" title="criterion_plot::ScaleFactor struct">ScaleFactor</a></div><div class="item-right docblock-short"><p>Axis scale factor</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Size.html" title="criterion_plot::Size struct">Size</a></div><div class="item-right docblock-short"><p>Figure size</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.TicLabels.html" title="criterion_plot::TicLabels struct">TicLabels</a></div><div class="item-right docblock-short"><p>Labels attached to the tics of an axis</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Title.html" title="criterion_plot::Title struct">Title</a></div><div class="item-right docblock-short"><p>Figure title</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Version.html" title="criterion_plot::Version struct">Version</a></div><div class="item-right docblock-short"><p>Structure representing a gnuplot version number.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Axes.html" title="criterion_plot::Axes enum">Axes</a></div><div class="item-right docblock-short"><p>A pair of axes that define a coordinate system</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Axis.html" title="criterion_plot::Axis enum">Axis</a></div><div class="item-right docblock-short"><p>A coordinate axis</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Color.html" title="criterion_plot::Color enum">Color</a></div><div class="item-right docblock-short"><p>Color</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Grid.html" title="criterion_plot::Grid enum">Grid</a></div><div class="item-right docblock-short"><p>Grid line</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.LineType.html" title="criterion_plot::LineType enum">LineType</a></div><div class="item-right docblock-short"><p>Line type</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.PointType.html" title="criterion_plot::PointType enum">PointType</a></div><div class="item-right docblock-short"><p>Point type</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Range.html" title="criterion_plot::Range enum">Range</a></div><div class="item-right docblock-short"><p>Axis range</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Scale.html" title="criterion_plot::Scale enum">Scale</a></div><div class="item-right docblock-short"><p>Axis scale</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Terminal.html" title="criterion_plot::Terminal enum">Terminal</a></div><div class="item-right docblock-short"><p>Output terminal</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.VersionError.html" title="criterion_plot::VersionError enum">VersionError</a></div><div class="item-right docblock-short"><p>Possible errors when parsing gnuplot’s version string</p>
+</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.version.html" title="criterion_plot::version fn">version</a></div><div class="item-right docblock-short"><p>Returns <code>gnuplot</code> version</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="criterion_plot" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.1 (e092d0b6b 2022-07-16)" ></div>
+</body></html>
