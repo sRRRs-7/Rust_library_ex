@@ -13,12 +13,14 @@ use crate::modules::{
     mod_error,
     mod_struct,
     mod_iter,
-    mod_comments
+    mod_comments,
+    mod_oop,
  };
 
 use core::str;
 use std::ops::Deref;
 use std::ops::Drop;
+use super::mod_oop2;
 use super::mod_trait;
 
 #[derive(Debug)]
@@ -76,6 +78,8 @@ pub fn main() {
         mod_struct::main();
         mod_trait::main();
         mod_iter::main();
+        mod_oop::main();
+        mod_oop2::main();
     }
 }
 

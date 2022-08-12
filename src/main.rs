@@ -6,6 +6,7 @@ mod lib;
 mod practice;
 mod cargo;
 mod smart_pointer;
+mod thread;
 
 fn main() {
     // CLI
@@ -19,15 +20,18 @@ fn main() {
     test();
 
     modules::root::main();
-    // practice module
-    practice::closure::main();
-    practice::closure_generics::main();
     // cargo module
     cargo::mod_cargo::main();
     // smt_ptr module
     smart_pointer::smt_ptr::main();
     smart_pointer::ref_cell::main();
     smart_pointer::rc_weak::main();
+    // thread
+    thread::concurrent::main();
+    // practice module
+    practice::closure::main();
+    practice::closure_generics::main();
+    practice::if_let::main();
 }
 
 
