@@ -1,4 +1,4 @@
-use std::{fmt::{self, Display}};
+use std::{fmt::{self, Display}, ops::Add, ptr::addr_of};
 
 
 
@@ -77,13 +77,30 @@ struct Point {
 
  impl OutlinePrint for Point {}
 
-
  // orphan rule
  struct Wrapper(Vec<String>);
 
  impl Display for Wrapper {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.0.join(" "))
+    }
+ }
+
+
+ // struct add calculation
+ #[derive(Debug)]
+ struct Coordinates {
+    x: i32,
+    y: i32,
+ }
+
+ impl Add for Coordinates {
+    type Output = Coordinates;
+    fn add(self, other: Coordinates) -> Coordinates {
+        Coordinates {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
     }
  }
 
@@ -108,4 +125,8 @@ struct Point {
             ]
         );
     println!("{}", wrapper);
+
+    // add trait
+    let plus = Coordinates{x: 1, y: 1} + Coordinates{x: 1, y: 1};
+    println!("{:?}", plus);
 }
