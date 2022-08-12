@@ -7,6 +7,7 @@ mod practice;
 mod cargo;
 mod smart_pointer;
 mod thread;
+mod trait_relation;
 
 fn main() {
     // CLI
@@ -32,6 +33,8 @@ fn main() {
     practice::closure::main();
     practice::closure_generics::main();
     practice::if_let::main();
+    // trait relation
+    trait_relation::mod_trait::main();
 }
 
 
