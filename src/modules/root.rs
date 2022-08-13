@@ -15,6 +15,7 @@ use crate::modules::{
     mod_iter,
     mod_comments,
     mod_oop,
+    mod_type_alias,
  };
 
 use core::str;
@@ -80,6 +81,7 @@ pub fn main() {
         mod_iter::main();
         mod_oop::main();
         mod_oop2::main();
+        mod_type_alias::main();
     }
 }
 

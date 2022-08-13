@@ -8,6 +8,8 @@ mod cargo;
 mod smart_pointer;
 mod thread;
 mod trait_relation;
+mod macro_mod;
+
 
 fn main() {
     // CLI
@@ -29,12 +31,15 @@ fn main() {
     smart_pointer::rc_weak::main();
     // thread
     thread::concurrent::main();
+    // trait relation
+    trait_relation::mod_trait::main();
     // practice module
     practice::closure::main();
     practice::closure_generics::main();
     practice::if_let::main();
-    // trait relation
-    trait_relation::mod_trait::main();
+    practice::arg_fn::main();
+    // macro
+    macro_mod::mod_macro::main();
 }
 
 

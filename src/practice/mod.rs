@@ -3,3 +3,4 @@ pub mod closure_generics;
 pub mod lib;
 pub mod decode_algorithm;
 pub mod if_let;
+pub mod arg_fn;

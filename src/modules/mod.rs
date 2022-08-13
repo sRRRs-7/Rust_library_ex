@@ -18,3 +18,4 @@ pub mod mod_iter;
 pub mod mod_comments;
 pub mod mod_oop;
 pub mod mod_oop2;
+pub mod mod_type_alias;
