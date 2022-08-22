@@ -11,7 +11,6 @@ trait From<T> {
 }
 
 
-
 impl From<[u8; 4]> for IpAddr {
     fn from(v: [u8; 4]) -> Self {
         Self::V4(Ipv4Addr::from(v))
