@@ -2,44 +2,47 @@
 mod modules;
 mod interface;
 mod cli;
-mod lib;
 mod practice;
 mod cargo;
 mod smart_pointer;
 mod thread;
 mod trait_relation;
 mod macro_mod;
+mod trait_associated_generic;
 
 
 fn main() {
-    // CLI
-    cli::command::main();
+    // // CLI
+    // cli::command::main();
 
-    // interface
-    // interface::user_interface::main();
+    // // interface
+    // // interface::user_interface::main();
 
-    // basic
-    basic();
-    test();
+    // // basic
+    // basic();
+    // test();
 
-    modules::root::main();
-    // cargo module
-    cargo::mod_cargo::main();
-    // smt_ptr module
-    smart_pointer::smt_ptr::main();
-    smart_pointer::ref_cell::main();
-    smart_pointer::rc_weak::main();
-    // thread
-    thread::concurrent::main();
-    // trait relation
-    trait_relation::mod_trait::main();
-    // practice module
-    practice::closure::main();
-    practice::closure_generics::main();
-    practice::if_let::main();
-    practice::arg_fn::main();
-    // macro
-    macro_mod::mod_macro::main();
+    // modules::root::main();
+    // // cargo module
+    // cargo::mod_cargo::main();
+    // // smt_ptr module
+    // smart_pointer::smt_ptr::main();
+    // smart_pointer::ref_cell::main();
+    // smart_pointer::rc_weak::main();
+    // // thread
+    // thread::concurrent::main();
+    // // trait relation
+    // trait_relation::mod_trait::main();
+    // // practice module
+    // practice::closure::main();
+    // practice::closure_generics::main();
+    // practice::if_let::main();
+    // practice::arg_fn::main();
+    // // macro
+    // macro_mod::mod_macro::main();
+
+    // associated_generic
+    trait_associated_generic::mod_associated_generic::main();
 }
 
 

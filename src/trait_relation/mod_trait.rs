@@ -1,7 +1,4 @@
 use std::{fmt::{self, Display}, ops::Add, ptr::addr_of};
-
-
-
 // iterator
 struct Counter {
     counter: i32
@@ -13,7 +10,6 @@ impl Iterator for Counter {
         Some(self.counter)
     }
 }
-
 
 // empty struct
 struct Cafe;

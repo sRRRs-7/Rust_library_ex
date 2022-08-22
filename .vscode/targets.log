@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Thu Aug 11 11:31:20 2022
+
+# Make data base, printed on Mon Aug 22 10:17:35 2022
 
 # Variables
 
@@ -15,6 +18,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+LC_CTYPE = UTF-8
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -22,7 +29,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/srrrs/App/Rust/app/rust/rust2
+CURDIR := /Users/srrrs/App/Rust/lib/lib/rust2
 # makefile
 SHELL = /bin/sh
 # environment
@@ -40,23 +47,25 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_CWD = /
+VSCODE_CWD = /Users/srrrs/App/Rust/lib/lib/rust2
 # environment
 PATH = /usr/local/opt/mysql/bin:/opt/homebrew/opt/mysql@5.7/bin:/Users/srrrs/opt/anaconda3/bin:/Users/srrrs/opt/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/srrrs/.cargo/bin:/Users/srrrs/.npm-global/bin:/Users/srrrs/go/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
+LaunchInstanceID = 28A0E0AE-9E71-4C12-BD89-8BB940EF45C4
+# environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.j1COL9HeOH/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.S8JuqGUxsV/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 CONDA_EXE = /Users/srrrs/opt/anaconda3/bin/conda
 # environment
-PWD = /Users/srrrs/App/Rust/app/rust/rust2
+PWD = /Users/srrrs/app/rust/lib/lib/rust2
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
@@ -70,7 +79,9 @@ HOME = /Users/srrrs
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/srrrs/Library/Application Support/Code/CachedData/6d9b74a70ca9c7733b29f0456fd8195364076dda
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/srrrs/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
 LOGNAME = srrrs
 # environment
@@ -87,18 +98,24 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 CONDA_DEFAULT_ENV = base
 # environment
 XPC_FLAGS = 0x0
+# environment
+COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
-# default
-MAKECMDGOALS := all
 # environment
-SHLVL = 1
+LC_TERMINAL = iTerm2
+# environment
+SHLVL = 3
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = srrrs
 # makefile
 .DEFAULT_GOAL := write
+# default
+MAKECMDGOALS := all
+# environment
+TERM_SESSION_ID = w0t0p0:4801104A-EA04-4993-9851-9E5CA2CF190D
 # environment
 LESS = -R
 # automatic
@@ -107,6 +124,8 @@ LESS = -R
 CONDA_SHLVL = 1
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# environment
+TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -114,7 +133,7 @@ TMPDIR = /var/folders/3f/mr0qfjj10zv9_ct4rhft3ng40000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/srrrs/Library/Application Support/Code/1.70.1-main.sock
+VSCODE_IPC_HOOK = /Users/srrrs/Library/Application Support/Code/1.70.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -124,7 +143,11 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.21349133.21349139
+TERM_PROGRAM_VERSION = 3.4.16
+# environment
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.22629080.22629086.80DC63BB-14A0-4529-9981-DEE0B62B9B89
+# environment
+LC_TERMINAL_VERSION = 3.4.16
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -132,7 +155,11 @@ HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +F = $(notdir $+)
 # environment
+ITERM_SESSION_ID = w0t0p0:4801104A-EA04-4993-9851-9E5CA2CF190D
+# environment
 HOMEBREW_REPOSITORY = /opt/homebrew
+# environment
+COLORFGBG = 15;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
 # environment
@@ -142,11 +169,17 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
+ITERM_PROFILE = zsh
+# environment
 PAGER = less
 # environment
 LC_ALL = C
 # environment
 CONDA_PYTHON_EXE = /Users/srrrs/opt/anaconda3/bin/python
+# environment
+SECURITYSESSIONID = 186ad
+# environment
+P9K_TTY = old
 # automatic
 ^F = $(notdir $^)
 # default
@@ -160,13 +193,17 @@ MAKELEVEL := 0
 # environment
 CONDA_PREFIX = /Users/srrrs/opt/anaconda3
 # environment
-VSCODE_PID = 52546
+TERM = xterm-256color
+# environment
+_P9K_TTY = /dev/ttys000
+# environment
+VSCODE_PID = 2541
 # environment
 _CE_CONDA = 
 # environment
 LANG = C
 # variable set hash-table stats:
-# Load=77/1024=8%, Rehash=0, Collisions=2/101=2%
+# Load=94/1024=9%, Rehash=0, Collisions=5/118=4%
 
 # Pattern-specific Variable Values
 
@@ -174,7 +211,7 @@ LANG = C
 
 # Directories
 
-# . (device 16777234, inode 20337671): 16 files, no impossibilities.
+# . (device 16777231, inode 20337671): 16 files, no impossibilities.
 
 # 16 files, no impossibilities in 1 directories.
 
@@ -183,6 +220,14 @@ LANG = C
 # No implicit rules.
 
 # Files
+
+command:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 15):
+	cargo run g text.txt
+	
 
 # Not a target:
 all:
@@ -215,7 +260,7 @@ add:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-08 11:35:58
+#  Last modified 2022-08-11 16:15:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -265,7 +310,7 @@ search:
 	
 
 # files hash-table stats:
-# Load=11/1024=1%, Rehash=0, Collisions=0/26=0%
+# Load=12/1024=1%, Rehash=0, Collisions=0/27=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -277,8 +322,6 @@ search:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Aug 11 11:31:20 2022
+# Finished Make data base on Mon Aug 22 10:17:35 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-
